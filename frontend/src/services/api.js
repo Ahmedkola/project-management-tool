@@ -2,8 +2,9 @@ import axios from 'axios';
 
 // Create an instance of axios with a base URL for your Django backend
 const apiClient = axios.create({
-  // IMPORTANT: Replace this placeholder with the actual live URL of your deployed backend
-  baseURL: 'https://your-unique-backend-name.herokuapp.com/api',
+  // IMPORTANT: Replace 'your-username' with your actual PythonAnywhere username.
+  // This must match the URL of your deployed backend.
+  baseURL: 'https://AhmedKola.pythonanywhere.com/api',
 });
 
 // Use an interceptor to add the auth token to every request
