@@ -99,3 +99,8 @@ class TaskViewSet(viewsets.ModelViewSet):
         if user.is_authenticated:
             return Task.objects.filter(project__members=user)
         return Task.objects.none()
+    
+class UserListView(generics.ListAPIView):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
+    permission_classes = [IsAuthenticated]

@@ -1,0 +1,249 @@
+{
+	"info": {
+		"_postman_id": "2f35cd71-cf7b-43d2-afe2-7c0c236710cf",
+		"name": "project_management_tool",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "42234774"
+	},
+	"item": [
+		{
+			"name": "register_user",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\": \"testdev\",\r\n    \"password\": \"some_strong_password\",\r\n    \"email\": \"dev@test.com\",\r\n    \"role\": \"DEVELOPER\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/api/register/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"register",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "api_token",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\": \"testmanager\",\r\n    \"password\": \"some_strong_password\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/api/token/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"token",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "list_projects",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzYwNzAzMjA1LCJpYXQiOjE3NjA3MDI5MDUsImp0aSI6ImM1ODE5ZjcwYmMxMjQ1YjliNjJjZTlmZjY1NTgwNWViIiwidXNlcl9pZCI6IjIifQ.CrVbT5Rz9zrvttz4h_5-9ToYOXcKMIEqdEWx0U5Cdgs",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"New Project by Manager\",\r\n    \"description\": \"This should be allowed\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/api/projects/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"projects",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Adds a user to a project",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzYwNzAzNjA5LCJpYXQiOjE3NjA3MDMzMDksImp0aSI6IjgyZjQ4MDVlZGE3MTQ4ZTM4NWQyMjM1MTVkZTkzMDAxIiwidXNlcl9pZCI6IjIifQ.baQwGxhC8cK47Iqjaz8opTSWIImtlTtMVc-6Mh4PNUA",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"user_id\": 3\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/api/projects/2/add_member/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"projects",
+						"2",
+						"add_member",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Creates a new task",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzYwNzAzNjA5LCJpYXQiOjE3NjA3MDMzMDksImp0aSI6IjgyZjQ4MDVlZGE3MTQ4ZTM4NWQyMjM1MTVkZTkzMDAxIiwidXNlcl9pZCI6IjIifQ.baQwGxhC8cK47Iqjaz8opTSWIImtlTtMVc-6Mh4PNUA",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"title\": \"Implement Login UI\",\r\n    \"description\": \"Create the main login page component in React.\",\r\n    \"project\": 2,\r\n    \"assigned_to\": 3,\r\n    \"deadline\": \"2025-10-25\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/api/tasks/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"tasks",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Retrieves details of a single project",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:8000/api/projects/2/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"projects",
+						"2",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Updates a task",
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"url": {
+					"raw": "/api/tasks/2/",
+					"path": [
+						"api",
+						"tasks",
+						"2",
+						""
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
