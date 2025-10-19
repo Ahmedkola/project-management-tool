@@ -1,13 +1,13 @@
 {
 	"info": {
 		"_postman_id": "2f35cd71-cf7b-43d2-afe2-7c0c236710cf",
-		"name": "project_management_tool",
+		"name": "Project Management Tool API",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "42234774"
 	},
 	"item": [
 		{
-			"name": "register_user",
+			"name": "Register New User",
 			"request": {
 				"method": "POST",
 				"header": [],
@@ -40,7 +40,7 @@
 			"response": []
 		},
 		{
-			"name": "api_token",
+			"name": "Login (Get Token)",
 			"request": {
 				"method": "POST",
 				"header": [],
@@ -73,14 +73,14 @@
 			"response": []
 		},
 		{
-			"name": "list_projects",
+			"name": "Create Project",
 			"request": {
 				"auth": {
 					"type": "bearer",
 					"bearer": [
 						{
 							"key": "token",
-							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzYwNzAzMjA1LCJpYXQiOjE3NjA3MDI5MDUsImp0aSI6ImM1ODE5ZjcwYmMxMjQ1YjliNjJjZTlmZjY1NTgwNWViIiwidXNlcl9pZCI6IjIifQ.CrVbT5Rz9zrvttz4h_5-9ToYOXcKMIEqdEWx0U5Cdgs",
+							"value": "{{accessToken}}",
 							"type": "string"
 						}
 					]
@@ -115,15 +115,84 @@
 			},
 			"response": []
 		},
-		{
-			"name": "Adds a user to a project",
+        {
+			"name": "List Projects",
 			"request": {
 				"auth": {
 					"type": "bearer",
 					"bearer": [
 						{
 							"key": "token",
-							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzYwNzAzNjA5LCJpYXQiOjE3NjA3MDMzMDksImp0aSI6IjgyZjQ4MDVlZGE3MTQ4ZTM4NWQyMjM1MTVkZTkzMDAxIiwidXNlcl9pZCI6IjIifQ.baQwGxhC8cK47Iqjaz8opTSWIImtlTtMVc-6Mh4PNUA",
+							"value": "{{accessToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:8000/api/projects/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"projects",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Project Details",
+			"request": {
+                "auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{accessToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:8000/api/projects/2/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"projects",
+						"2",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+        {
+			"name": "Add Member to Project",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{accessToken}}",
 							"type": "string"
 						}
 					]
@@ -161,14 +230,14 @@
 			"response": []
 		},
 		{
-			"name": "Creates a new task",
+			"name": "Create Task",
 			"request": {
 				"auth": {
 					"type": "bearer",
 					"bearer": [
 						{
 							"key": "token",
-							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzYwNzAzNjA5LCJpYXQiOjE3NjA3MDMzMDksImp0aSI6IjgyZjQ4MDVlZGE3MTQ4ZTM4NWQyMjM1MTVkZTkzMDAxIiwidXNlcl9pZCI6IjIifQ.baQwGxhC8cK47Iqjaz8opTSWIImtlTtMVc-6Mh4PNUA",
+							"value": "{{accessToken}}",
 							"type": "string"
 						}
 					]
@@ -204,12 +273,31 @@
 			"response": []
 		},
 		{
-			"name": "Retrieves details of a single project",
+			"name": "Update Task Status",
 			"request": {
-				"method": "POST",
+                "auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{accessToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PATCH",
 				"header": [],
+                "body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"status\": \"IN_PROGRESS\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
 				"url": {
-					"raw": "http://127.0.0.1:8000/api/projects/2/",
+					"raw": "http://127.0.0.1:8000/api/tasks/1/",
 					"protocol": "http",
 					"host": [
 						"127",
@@ -220,25 +308,8 @@
 					"port": "8000",
 					"path": [
 						"api",
-						"projects",
-						"2",
-						""
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Updates a task",
-			"request": {
-				"method": "PATCH",
-				"header": [],
-				"url": {
-					"raw": "/api/tasks/2/",
-					"path": [
-						"api",
 						"tasks",
-						"2",
+						"1",
 						""
 					]
 				}
