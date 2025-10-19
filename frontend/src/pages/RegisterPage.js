@@ -8,7 +8,7 @@ const RegisterPage = () => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [email, setEmail] = useState('');
-    const [role, setRole] = useState('DEVELOPER'); // Default role
+    const [role, setRole] = useState('DEVELOPER'); 
     const [error, setError] = useState('');
     const navigate = useNavigate();
 
@@ -22,7 +22,7 @@ const RegisterPage = () => {
                 role,
             });
             alert('Registration successful! Please log in.');
-            navigate('/login'); // Redirect to login page
+            navigate('/login'); 
         } catch (err) {
             setError('Failed to register. Please try a different username or email.');
             console.error(err);

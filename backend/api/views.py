@@ -8,16 +8,14 @@ from rest_framework.response import Response
 from .models import User, Project, Task
 from .serializers import UserSerializer, ProjectSerializer, TaskSerializer
 from .permissions import IsAdminUser, IsManagerUser
-from rest_framework_simplejwt.views import TokenObtainPairView # Import this
-from .serializers import MyTokenObtainPairSerializer # Import our new serializer
+from rest_framework_simplejwt.views import TokenObtainPairView 
+from .serializers import MyTokenObtainPairSerializer 
 
-# ... (other imports) ...
 
-# --- ADD THIS NEW VIEW ---
 class MyTokenObtainPairView(TokenObtainPairView):
     serializer_class = MyTokenObtainPairSerializer
 
-# --- User Views ---
+
 
 class CreateUserView(generics.CreateAPIView):
     """
@@ -27,17 +25,13 @@ class CreateUserView(generics.CreateAPIView):
     serializer_class = UserSerializer
     permission_classes = [AllowAny]
 
-# --- Project Views ---
 
 class ProjectViewSet(viewsets.ModelViewSet):
-    """
-    Handles all CRUD operations for Projects, plus adding members.
-    """
+    
     queryset = Project.objects.all()
     serializer_class = ProjectSerializer
 
     def get_permissions(self):
-        """Assigns permissions based on the requested action."""
         if self.action in ['create', 'update', 'partial_update', 'destroy', 'add_member']:
             # [cite_start]Only Admins or Managers can create, modify, or add members to projects[cite: 19, 20].
             self.permission_classes = [IsAdminUser | IsManagerUser]
@@ -49,7 +43,6 @@ class ProjectViewSet(viewsets.ModelViewSet):
         """Filters projects to only show those the user is a member of."""
         user = self.request.user
         if user.is_authenticated:
-            # Return projects where the current user is listed in the 'members' field.
             return user.projects.all()
         return Project.objects.none()
 
@@ -75,17 +68,15 @@ class ProjectViewSet(viewsets.ModelViewSet):
         project.members.add(user)
         return Response({'status': f'User {user.username} added to project {project.name}'}, status=status.HTTP_200_OK)
 
-# --- Task Views ---
+
 
 class TaskViewSet(viewsets.ModelViewSet):
-    """
-    Handles all CRUD operations for Tasks.
-    """
+    
     queryset = Task.objects.all()
     serializer_class = TaskSerializer
 
     def get_permissions(self):
-        """Assigns permissions based on the requested action."""
+       
         if self.action in ['create', 'destroy']:
             # [cite_start]Only Admins or Managers can create or delete tasks[cite: 19, 20].
             self.permission_classes = [IsAdminUser | IsManagerUser]
@@ -94,7 +85,7 @@ class TaskViewSet(viewsets.ModelViewSet):
         return super().get_permissions()
 
     def get_queryset(self):
-        """Filters tasks to only show those in projects the user is a member of."""
+        
         user = self.request.user
         if user.is_authenticated:
             return Task.objects.filter(project__members=user)

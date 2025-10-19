@@ -4,7 +4,7 @@ from django.db import models
 from django.contrib.auth.models import AbstractUser
 
 class User(AbstractUser):
-    # Enum for user roles
+    
     class Role(models.TextChoices):
         ADMIN = 'ADMIN', 'Admin'
         MANAGER = 'MANAGER', 'Manager'
@@ -15,7 +15,6 @@ class User(AbstractUser):
 class Project(models.Model):
     name = models.CharField(max_length=200)
     description = models.TextField(blank=True, null=True)
-    # Only Managers or Admins should ideally be owners, enforced in the view
     owner = models.ForeignKey(User, on_delete=models.CASCADE, related_name='owned_projects')
     members = models.ManyToManyField(User, related_name='projects')
     created_at = models.DateTimeField(auto_now_add=True)
@@ -24,7 +23,6 @@ class Project(models.Model):
         return self.name
 
 class Task(models.Model):
-    # Enum for task status
     class Status(models.TextChoices):
         TO_DO = 'TO_DO', 'To Do'
         IN_PROGRESS = 'IN_PROGRESS', 'In Progress'

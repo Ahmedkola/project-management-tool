@@ -1,7 +1,7 @@
 // frontend/src/pages/LoginPage.js
 
 import React, { useState, useContext } from 'react';
-import { useNavigate, Link } from 'react-router-dom'; // 1. Add 'Link' here
+import { useNavigate, Link } from 'react-router-dom'; 
 import apiClient from '../services/api';
 import AuthContext from '../context/AuthContext';
 

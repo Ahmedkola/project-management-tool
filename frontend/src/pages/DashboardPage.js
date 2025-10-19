@@ -6,7 +6,7 @@ import AuthContext from '../context/AuthContext';
 import apiClient from '../services/api';
 
 const DashboardPage = () => {
-  const { user, logout } = useContext(AuthContext); // This is the user object that is initially null
+  const { user, logout } = useContext(AuthContext); 
   const navigate = useNavigate();
 
   const [projects, setProjects] = useState([]);
@@ -17,7 +17,7 @@ const DashboardPage = () => {
   const [newProjectDescription, setNewProjectDescription] = useState('');
 
   useEffect(() => {
-    // Only fetch projects if the user object is available
+    
     if (user) {
       const fetchProjects = async () => {
         try {
@@ -33,11 +33,11 @@ const DashboardPage = () => {
 
       fetchProjects();
     }
-  }, [user]); // Re-run this effect when the user object changes
+  }, [user]); 
 
   const handleCreateProject = async (e) => {
     e.preventDefault();
-    // ... (rest of the function is the same)
+   
     try {
       const response = await apiClient.post('/projects/', {
         name: newProjectName,
@@ -57,9 +57,6 @@ const DashboardPage = () => {
     navigate('/login');
   };
 
-  // --- THIS IS THE FIX ---
-  // If the user data is not yet loaded from the context, show a loading screen.
-  // This prevents the component from crashing by trying to access user.username.
   if (!user) {
     return <div>Loading user data...</div>;
   }
